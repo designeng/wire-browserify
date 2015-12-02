@@ -18,7 +18,7 @@ var server = express();
 server.use(livereload({
   port: livereloadport
 }));
-server.use(express.static('./build'));
+server.use(express.static('./public'));
 
 function compile(watch) {
   var bundler = watchify(browserify('./src/index.js', { debug: true, extensions: ['.js', '.json'] }).transform(babel));
@@ -30,7 +30,7 @@ function compile(watch) {
       .pipe(buffer())
       .pipe(sourcemaps.init({ loadMaps: true }))
       .pipe(sourcemaps.write('./'))
-      .pipe(gulp.dest('./build'));
+      .pipe(gulp.dest('./public/build'));
   }
 
   function reload() {
